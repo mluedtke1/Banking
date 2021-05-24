@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Banking.Exceptions;
+using System;
 
 namespace Banking
 {
@@ -13,10 +14,22 @@ namespace Banking
 
             var accounts = new IBanking[] { sav2, cd1 };
 
-            foreach(var i in accounts)
+            var acct100 = new Account();
+            acct100.Deposit(10);
+            try
             {
-                Console.WriteLine(i.getBalance());
+                acct100.Withdraw(100);
+            } catch (InsufficientFundsException ex)
+            {
+                throw;
             }
+
+
+
+            //foreach(var i in accounts)
+            //{
+            //    Console.WriteLine(i.getBalance());
+            //}
 
 
 

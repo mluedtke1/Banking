@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Banking.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,6 +13,7 @@ namespace Banking
         public string Routing { get; set; }
         public string Description { get; set; }
 
+        //transfer method
         public bool Transfer(Account acctTo, decimal amount)
         {
             if (Withdraw(amount))
@@ -22,27 +24,32 @@ namespace Banking
             return false;
         }
 
+        //deposit method
         public virtual bool Deposit(decimal depAmnt)
         {
             if(depAmnt < 0)
             {
-                Console.WriteLine("Amount must be more than 0");
-                return false;
+                var ex = new InvalidParameterException();
+                ex.Amount = depAmnt;
+                throw ex;
             }
             Balance += depAmnt;
             return true;
         }
+
+        //withdraw method
         public virtual bool Withdraw(decimal wdrAmnt)
         {
             if(wdrAmnt < 0)
             {
-                Console.WriteLine("Amount must be more than 0");
-                return false;
+                //var ex = new InvalidParameterException();
+                //ex.Amount = wdrAmnt;
+                //throw ex;
+                throw new InvalidParameterException(wdrAmnt);
             }
             if(wdrAmnt > Balance)
             {
-                Console.WriteLine("Insufficient funds");
-                return false;
+                throw new InsufficientFundsException(wdrAmnt, Balance);
             }
 
             Balance -= wdrAmnt;

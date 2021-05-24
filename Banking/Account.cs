@@ -22,7 +22,7 @@ namespace Banking
             return false;
         }
 
-        public bool Deposit(decimal depAmnt)
+        public virtual bool Deposit(decimal depAmnt)
         {
             if(depAmnt < 0)
             {
@@ -32,7 +32,7 @@ namespace Banking
             Balance += depAmnt;
             return true;
         }
-        public bool Withdraw(decimal wdrAmnt)
+        public virtual bool Withdraw(decimal wdrAmnt)
         {
             if(wdrAmnt < 0)
             {

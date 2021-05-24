@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Banking
 {
-    class CD2
+    class CD2 : IBanking
     {
         private Account account = new Account();
         public DateTime DepDate { get; set; }
@@ -37,6 +37,15 @@ namespace Banking
             var interest = account.Balance * (interestRate / 12) * Months;
             success = account.Deposit(interest);
             WithDate = DepDate.AddMonths(Months);
+        }
+        public decimal getBalance()
+        {
+            return account.Balance;
+        }
+
+        public string getAcctNum()
+        {
+            return account.AccountNumber;
         }
     }
 }

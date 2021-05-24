@@ -6,20 +6,23 @@ namespace Banking
     {
         static void Main(string[] args)
         {
-            var acc1 = new Account();
-            var acc2 = new Account();
+
             var sav2 = new Savings2();
-            var cd1 = new CD2(Amount: 1000, Months: 12);
-            
-            
-            
-            
-            //cd1.Deposit(1);
-            //cd1.Withdraw(1);
+            sav2.Deposit(2000);
+            var cd1 = new CD2(Amount: 5000, Months: 60);
+
+            var accounts = new IBanking[] { sav2, cd1 };
+
+            foreach(var i in accounts)
+            {
+                Console.WriteLine(i.getBalance());
+            }
+
+
+
             //cd1.WithDate = DateTime.Now.AddDays(-1);
-            //Console.WriteLine(cd1.Balance);
+
             //var funds = cd1.Withdraw();
-            //Console.WriteLine(cd1.Balance);
             //sav2.Deposit(500);
             //sav2.InterestRate = .12m;
             //sav2.PayInterest(5);

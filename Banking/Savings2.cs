@@ -4,16 +4,22 @@ using System.Text;
 
 namespace Banking
 {
-    class Savings2
+    class Savings2: IBanking
     {
         private Account account { get; set; }
         public decimal InterestRate { get; set; } = 0.01m;
-
+        public string AccountNumber {
+            get {
+                return account.AccountNumber;
+            }
+        }
         public Savings2()
         {
             account = new Account();
         }
         
+
+
         public bool Deposit(decimal amount)
         {
             return account.Deposit(amount);
@@ -34,6 +40,16 @@ namespace Banking
         public void PayInterest(int months)
         {
             Deposit(CalcInMonths(months));
+        }
+
+        public decimal getBalance()
+        {
+            return account.Balance;
+        }
+
+        public string getAcctNum()
+        {
+            return account.AccountNumber;
         }
     }
 }
